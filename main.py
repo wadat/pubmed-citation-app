@@ -282,7 +282,7 @@ st.title('Pubmed Citation App')
 st.caption('文献のPDFファイルからPubmed形式のCitationを生成します')
 
 # UploarderからPDFを取得
-uploaded_files = st.file_uploader("Choose PDF files", type=['pdf'], accept_multiple_files=True)
+uploaded_files = st.file_uploader("Upload PDF files", type=['pdf'], accept_multiple_files=True)
 
 for uploaded_file in uploaded_files:
 
