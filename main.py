@@ -279,10 +279,10 @@ def __find_doi(file: io.IOBase) -> dict:
 
 # タイトル
 st.title('Pubmed Citation App')
-st.caption('文献のPDFファイルからPubmedリンクを生成します')
+st.caption('文献のPDFファイルからPubmedのCitationを生成します')
 
 # UploarderからPDFを取得
-uploaded_files = st.file_uploader("Choose a PDF file", type=['pdf'], accept_multiple_files=True)
+uploaded_files = st.file_uploader("Choose PDF files", type=['pdf'], accept_multiple_files=True)
 
 for uploaded_file in uploaded_files:
 
