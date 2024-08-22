@@ -6,8 +6,8 @@ Created on Mon Aug 20 21:16:37 2024
 import json
 import requests
 from xml.etree.ElementTree import *
-import sys
-sys.path.append("lib.bs4")
+# import sys
+# sys.path.append("lib.bs4")
 from bs4 import BeautifulSoup
 import lxml
 
@@ -303,7 +303,7 @@ for uploaded_file in uploaded_files:
 
         pubmed_url = f'https://pubmed.ncbi.nlm.nih.gov/{pmid}/'
         pubmed_res = requests.get(pubmed_url)
-        soup = BeautifulSoup(pubmed_res.text, 'lxml')
+        soup = BeautifulSoup(pubmed_res.text, 'html.parser')
         
         title = soup.find("h1", class_="heading-title").text
         title = title.replace('\n', '').strip()
