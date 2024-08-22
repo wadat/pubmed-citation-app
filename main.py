@@ -6,6 +6,8 @@ Created on Mon Aug 20 21:16:37 2024
 import json
 import requests
 from xml.etree.ElementTree import *
+import sys
+sys.path.append("lib.bs4")
 from bs4 import BeautifulSoup
 import lxml
 
