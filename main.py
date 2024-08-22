@@ -288,13 +288,17 @@ st.caption('文献のPDFファイルからPubmed形式のCitationを生成しま
 # UploarderからPDFを取得
 uploaded_files = st.file_uploader("Upload PDF files", type=['pdf'], accept_multiple_files=True)
 
-for uploaded_file in uploaded_files:
+for i, uploaded_file in enumerate(uploaded_files):
 
     if uploaded_file is not None:
         
+        f"""
+        ##### {i+1}: {uploaded_file.name}
+        """
+
         result = pdf2doi_singlefile(uploaded_file)
         doi = result['identifier']
-        st.write("DOI extracted: ", doi)
+        # st.write("DOI extracted: ", doi)
 
         esearch_url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&term={doi}'
         res = requests.get(esearch_url)
