@@ -7,6 +7,7 @@ import json
 import requests
 from xml.etree.ElementTree import *
 from bs4 import BeautifulSoup
+import lxml
 
 import streamlit as st
 # import pdf2doi
