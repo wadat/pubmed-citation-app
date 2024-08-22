@@ -6,6 +6,7 @@ Created on Mon Aug 20 21:16:37 2024
 import json
 import requests
 from xml.etree.ElementTree import *
+from bs4 import BeautifulSoup
 
 import streamlit as st
 # import pdf2doi
@@ -297,30 +298,20 @@ for uploaded_file in uploaded_files:
         jsonData = res.json()
         pmid = jsonData['esearchresult']['idlist'][0]
 
-        efetch_url = f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id={pmid}"
-        res = requests.get(efetch_url)
-        element = fromstring(res.text)
-        title = element.findtext(".//ArticleTitle")
-
-        iso_abb = element.findtext(".//ISOAbbreviation")
-        pub_year = element.findtext(".//PubDate//Year")
-        pub_month = element.findtext(".//PubDate//Month")
-        pub_day = element.findtext(".//PubDate//Day")
-        pub_volume = element.findtext(".//JournalIssue//Volume")
-        pub_issue = element.findtext(".//JournalIssue//Issue")
-        if pub_issue:
-            pub_issue = f'({pub_issue})'
-        else:
-            pub_issue = ''
-        start_page = element.findtext(".//Pagination//StartPage")
-        end_page = element.findtext(".//Pagination//EndPage")
-        if end_page:
-            end_page = f'-{end_page}'
-        else:
-            end_page = ''        
-        citation = f"{iso_abb}. {pub_year} {pub_month};{pub_volume}{pub_issue}:{start_page}{end_page}." # {pub_year} {pub_month} {pub_day}; 
-
         pubmed_url = f'https://pubmed.ncbi.nlm.nih.gov/{pmid}/'
+        pubmed_res = requests.get(pubmed_url)
+        soup = BeautifulSoup(pubmed_res.text, 'lxml')
+        
+        title = soup.find("h1", class_="heading-title").text
+        title = title.replace('\n', '').strip()
+        
+        journal = soup.find("button", class_="journal-actions-trigger trigger").text
+        journal = journal.replace('\n', '').strip()
+        
+        pagination = soup.find("span", class_="cit").text
+        pagination = pagination.replace('\n', '').strip()
+        
+        citation = f"{journal}. {pagination}"
 
         f"""
         ```markdown
