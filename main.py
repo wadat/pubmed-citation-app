@@ -293,7 +293,7 @@ for i, uploaded_file in enumerate(uploaded_files):
     if uploaded_file is not None:
         
         f"""
-        ##### {i+1}: {uploaded_file.name}
+        ##### {i+1}. {uploaded_file.name}
         """
 
         result = pdf2doi_singlefile(uploaded_file)
