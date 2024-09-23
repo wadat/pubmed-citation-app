@@ -9,3 +9,4 @@ pyperclip
 easygui
 pdfminer.six==20221105
 pypdf
+lxml
