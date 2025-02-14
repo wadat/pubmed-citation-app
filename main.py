@@ -15,11 +15,12 @@ import streamlit as st
 # import pdf2doi
 # pdf2doi.config.set('verbose',False)
 
-# import logging
+import os
 from os import path, listdir
 import io
 
 import finders
+import configparser
 # import config
 
 # __init__.py
@@ -38,10 +39,6 @@ logger.propagate = False
 
 
 ######## config
-
-import configparser
-import os
-import logging
 
 # ''' 
 # method_dxdoiorg                         It sets which method is used when querying dx.doi.org to retrieve the bibtex info
