@@ -308,6 +308,9 @@ for i, uploaded_file in enumerate(uploaded_files):
         
         title = soup.find("h1", class_="heading-title").text
         title = title.replace('\n', '').strip()
+
+        authors_list = soup.find_all('a', class_='full-name')
+        first_author_last_name = authors_list[0].get_text().split()[-1]
         
         journal = soup.find("button", class_="journal-actions-trigger trigger").text
         journal = journal.replace('\n', '').strip()
